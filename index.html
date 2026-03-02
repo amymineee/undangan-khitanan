@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Khitanan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(180deg,#ffffff,#f3e8ff);
+    color:#000;
+}
+
+/* ===== COVER ===== */
+#cover{
+    padding:80px 20px 60px;
+}
+
+.cover-box{
+    width:100%;
+    max-width:420px;
+    margin:auto;
+    padding:60px 30px;
+    border-radius:35px;
+    background:white;
+    box-shadow:0 25px 60px rgba(0,0,0,0.1);
+    text-align:center;
+    position:relative;
+}
+
+.flower-top{
+    position:absolute;
+    top:-60px;
+    left:-50px;
+    width:180px;
+}
+
+.flower-bottom{
+    position:absolute;
+    bottom:-60px;
+    right:-50px;
+    width:180px;
+}
+
+.bismillah{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.acara{
+    font-family:'Cormorant Garamond', serif;
+    font-size:26px;
+    letter-spacing:3px;
+}
+
+.nama{
+    font-family:'Great Vibes', cursive;
+    font-size:30px;      /* diperkecil */
+    line-height:1.2;     /* biar rapat & sejajar */
+    margin:20px 0;
+    word-break:break-word;
+
+}
+
+.kepada{
+    font-size:14px;
+    margin-top:15px;
+}
+
+.nama-tamu{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    font-weight:600;
+}
+
+/* BUTTON */
+.open-btn{
+    margin-top:35px;
+    padding:16px;
+    width:100%;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(135deg,#a855f7,#7c3aed);
+    color:white; /* tetap putih */
+    font-size:14px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.open-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* MUSIC BUTTON */
+.music-control{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:48px;
+    height:48px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:18px;
+    z-index:1000;
+}
+
+/* ===== HALAMAN ISI ===== */
+#content{
+    display:none;
+    animation:fadeIn 1s ease;
+}
+
+.section{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.card{
+    background:white;
+    max-width:420px;
+    margin:auto;
+    padding:40px 25px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:26px;
+}
+
+.foto{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:20px;
+    margin:20px 0;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+audio{ display:none; }
+
+</style>
+</head>
+<body>
+
+<!-- MUSIC BUTTON -->
+<div class="music-control" onclick="toggleMusic()">♪</div>
+
+<!-- ===== COVER ===== -->
+<div id="cover">
+    <div class="cover-box">
+
+        <img src="floral-top.png" class="flower-top">
+        <img src="floral-bottom.png" class="flower-bottom">
+
+        <div class="bismillah">
+            بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+        </div>
+
+        <div class="acara">UNDANGAN KHITANAN</div>
+        <div class="nama">M. Hamzah Ibnu Musa Al-fath Ni</div>
+
+        <div class="kepada">KEPADA YTH</div>
+        <div class="nama-tamu" id="namaTamu">Tamu Undangan</div>
+
+        <button class="open-btn" onclick="bukaUndangan()">
+            BUKA UNDANGAN
+        </button>
+
+    </div>
+</div>
+
+<!-- ===== HALAMAN ISI ===== -->
+<div id="content">
+
+    <div class="section">
+        <div class="card">
+            <h2>Ahmad Fulan</h2>
+            <img src="anak.jpg" class="foto">
+            <p>Putra dari</p>
+            <p><b>Bapak Fulan & Ibu Fulanah</b></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card">
+            <h2>Minggu, 25 Mei 2026</h2>
+            <p>Pukul 09.00 WIB</p>
+            <p>Jl. Contoh Alamat No. 123</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card">
+            <p><i>"Semoga menjadi anak yang sholeh dan kebanggaan keluarga"</i></p>
+        </div>
+    </div>
+
+</div>
+
+<audio id="musik" loop>
+    <source src="musik.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* Nama dari URL */
+const params = new URLSearchParams(window.location.search);
+const nama = params.get("to");
+if(nama){
+    document.getElementById("namaTamu").innerText = nama;
+}
+
+/* Buka Undangan */
+function bukaUndangan(){
+    document.getElementById("cover").style.display="none";
+    document.getElementById("content").style.display="block";
+    window.scrollTo(0,0);
+}
+
+/* Music */
+var musik = document.getElementById("musik");
+var playing = false;
+
+function toggleMusic(){
+    if(!playing){
+        musik.play();
+        playing = true;
+    } else {
+        musik.pause();
+        playing = false;
+    }
+}
+
+</script>
+
+</body>
+</html>
